@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 *
 * */
 
-
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -50,16 +49,22 @@ public class ProductController {
             productVO.setCategoryType(pc.getCategoryType());
             List<ProductInfoVO> productInfoVOList = new ArrayList<>();
             for(ProductInfo p:productInfoList){
-                ProductInfoVO productInfoVO =  new ProductInfoVO();
+                if(p.getCategoryType().equals(pc.getCategoryType())) {
+                    ProductInfoVO productInfoVO = new ProductInfoVO();
 //                productInfoVO.setProductId(p.getProductId());
 //                productInfoVO.setProductName(p.getProductName());
 //                productInfoVO.setProductPrice(p.getProductPrice());
-                BeanUtils.copyProperties(p,productInfoVO);
-                productInfoVOList.add(productInfoVO);
+                    BeanUtils.copyProperties(p, productInfoVO);
+                    productInfoVOList.add(productInfoVO);
+                }
             }
             productVO.setFoods(productInfoVOList);
             productVOlist.add(productVO);
         }
-        return null;
+        ResultVO resultVO=new ResultVO();
+        resultVO.setCode(0);
+        resultVO.setMsg("successful");
+        resultVO.setData(productVOlist);
+        return resultVO;
     }
 }
