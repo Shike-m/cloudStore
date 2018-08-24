@@ -1,5 +1,6 @@
 package com.store.product.controller;
 
+import com.store.product.DTO.CartDTO;
 import com.store.product.VO.ProductInfoVO;
 import com.store.product.VO.ProductVO;
 import com.store.product.VO.ResultVO;
@@ -10,9 +11,7 @@ import com.store.product.service.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,5 +65,16 @@ public class ProductController {
         resultVO.setMsg("successful");
         resultVO.setData(productVOlist);
         return resultVO;
+    }
+
+    // fetch list of product for order service
+    @PostMapping("/listForOrder")
+    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList){
+        return productService.findList(productIdList);
+    }
+
+    @PostMapping("/decreaseStock")
+    public void decreaseStock(@RequestBody List<CartDTO> cartDTOList){
+        productService.decreaseStock(cartDTOList);
     }
 }
