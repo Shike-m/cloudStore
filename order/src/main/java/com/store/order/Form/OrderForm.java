@@ -11,13 +11,13 @@ public class OrderForm {
     @NotEmpty
     private String name;
 // phone number of buyer
-    @NotEmpty
+   // @NotEmpty
     private String phone;
-    @NotEmpty
+   // @NotEmpty
     private String address;
-    @NotEmpty
+   // @NotEmpty
     private String openid;
-    @NotEmpty
+   // @NotEmpty
     private String items;
 
     public String getName() {

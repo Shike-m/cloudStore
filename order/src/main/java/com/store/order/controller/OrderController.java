@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,7 +42,7 @@ class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/create")
+    @PostMapping("/create")
     public ResultVO<Map<String,String>> create(@Valid OrderForm orderForm, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             log.error("incorrect order features, orderForm={}",orderForm);
